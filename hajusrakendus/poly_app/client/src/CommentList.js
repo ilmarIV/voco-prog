@@ -5,9 +5,11 @@ const CommentList = ({postid}) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    if (!postid) return;
+
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001posts/${postid}/comments`)
+        const res = await axios.get(`http://localhost:5001/posts/${postid}/comments`)
         const comments = res.data
         setComments(comments);
       } catch (err) {
@@ -15,7 +17,7 @@ const CommentList = ({postid}) => {
       }
     }
     fetchComments();
-  }, []);
+  }, [postid]);
 
   const renderedComments = comments.map((comment) => {
     return <li key={comment.id}>{comment.content}</li>
@@ -25,3 +27,4 @@ const CommentList = ({postid}) => {
 }
 
 export default CommentList;
+

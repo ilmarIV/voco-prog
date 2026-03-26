@@ -1,26 +1,26 @@
 import axios from "axios";
 import { useState } from "react";
 
-const CommentCreate = ({postid}) => {
-  const [content, setContent] = useState('');
+const PostCreate = () => {
+  const [title, setTitle] = useState('');
 
   const onChange = (event) => {
-    setContent(event.target.value)
+    setTitle(event.target.value)
   }
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    await axios.post(`http://localhost:5001/posts/${postid}/comments`, {content})
-    setContent('')
+    await axios.post('http://localhost:5000/posts', {title})
+    setTitle('')
   }
 
-  return (
+  return(
     <div>
-      <form onSubmit= {onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label>New Comment</label>
+          <label>Title</label>
           <input
-            value={content}
+            value={title}
             onChange={onChange}
             className="form-control"
           />
@@ -31,5 +31,5 @@ const CommentCreate = ({postid}) => {
   )
 }
 
-export default CommentCreate;
+export default PostCreate;
 
