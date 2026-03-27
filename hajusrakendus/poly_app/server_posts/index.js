@@ -26,6 +26,7 @@ app.post('/posts', (req, res) => {
 
   axios.post('http://localhost:5005/events', {
     type: 'PostCreated',
+    data: post
   }).catch((err) => {
     console.log('Error sending event to event bus: ', err.message);
   })

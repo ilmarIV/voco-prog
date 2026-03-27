@@ -26,6 +26,11 @@ app.post('/posts/:id/comments', (req, res) => {
   res.status(201).json(comment);
 });
 
+app.post('/events', (req, res) => {
+  console.log('Received Event: ', req.body)
+  res.json({ })
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
