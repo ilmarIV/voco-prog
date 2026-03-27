@@ -18,6 +18,10 @@ app.post('/events', (req, res) => {
     console.log('Error forwarding to comment service', err.message)
   })
 
+  axios.post('http://localhost:5002/events', event).catch(err => {
+    console.log('Error forwarding to comment service', err.message)
+  })
+
   res.json({  status: 'OK'})
 })
 
