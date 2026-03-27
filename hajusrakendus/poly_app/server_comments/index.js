@@ -1,6 +1,7 @@
 const express = require('express');
 const { randomBytes } = require('node:crypto');
 const cors = require('cors');
+const axios = require('axios')
 
 const app = express();
 
@@ -23,11 +24,24 @@ app.post('/posts/:id/comments', (req, res) => {
     content
   };
   postComments.push(comment);
+
+  axios.post('http://localhost:5005/events', {
+    type: 'CommentCreated',
+    data: comment
+  }).catch((err) => {
+    console.log('Error sending event to event bus: ', err.message);
+  })
+
   res.status(201).json(comment);
 });
 
 app.post('/events', (req, res) => {
   console.log('Received Event: ', req.body)
+  res.json({ })
+})
+
+app.post('/events', (req, res) => {
+  console.log('Received event: ', req.body);
   res.json({ })
 })
 
